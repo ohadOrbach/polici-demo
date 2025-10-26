@@ -365,44 +365,41 @@ export default function ReportGenerator() {
                       </div>
                     )}
                     
-                    {param.type === 'daterange' && (
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-xs text-slate-400 mb-1">From Date</label>
-                          <input
-                            type="date"
-                            value={
-                              typeof parameters[param.id] === 'object' &&
-                              'from' in parameters[param.id]
-                                ? (parameters[param.id] as { from: string }).from
-                                : ''
-                            }
-                            onChange={(e) => handleParameterChange(param.id, {
-                              ...((typeof parameters[param.id] === 'object' && parameters[param.id]) || {}),
-                              from: e.target.value
-                            })}
-                            className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                          />
+                    {param.type === 'daterange' && (() => {
+                      const value = parameters[param.id];
+                      const dateRangeValue = typeof value === 'object' && value !== null && !Array.isArray(value) 
+                        ? (value as { from?: string; to?: string }) 
+                        : {};
+
+                      return (
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-xs text-slate-400 mb-1">From Date</label>
+                            <input
+                              type="date"
+                              value={dateRangeValue.from || ''}
+                              onChange={(e) => handleParameterChange(param.id, {
+                                ...(dateRangeValue || {}),
+                                from: e.target.value
+                              })}
+                              className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs text-slate-400 mb-1">To Date</label>
+                            <input
+                              type="date"
+                              value={dateRangeValue.to || ''}
+                              onChange={(e) => handleParameterChange(param.id, {
+                                ...(dateRangeValue || {}),
+                                to: e.target.value
+                              })}
+                              className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                            />
+                          </div>
                         </div>
-                        <div>
-                          <label className="block text-xs text-slate-400 mb-1">To Date</label>
-                          <input
-                            type="date"
-                            value={
-                              typeof parameters[param.id] === 'object' &&
-                              'to' in parameters[param.id]
-                                ? (parameters[param.id] as { to: string }).to
-                                : ''
-                            }
-                            onChange={(e) => handleParameterChange(param.id, {
-                              ...((typeof parameters[param.id] === 'object' && parameters[param.id]) || {}),
-                              to: e.target.value
-                            })}
-                            className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                          />
-                        </div>
-                      </div>
-                    )}
+                      );
+                    })()}
                     
                     {param.type === 'checkbox' && (
                       <label className="flex items-center space-x-3 p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors cursor-pointer">
