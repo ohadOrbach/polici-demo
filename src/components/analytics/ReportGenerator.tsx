@@ -36,7 +36,7 @@ interface ReportTemplate {
   color: string;
 }
 
-type ReportParameterValue = string | string[] | { from: string; to: string } | boolean;
+type ReportParameterValue = string | string[] | { from?: string; to?: string } | boolean;
 
 interface ReportParameter {
   id: string;
