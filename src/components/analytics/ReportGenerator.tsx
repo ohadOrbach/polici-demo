@@ -343,23 +343,25 @@ export default function ReportGenerator() {
                     
                     {param.type === 'multiselect' && (
                       <div className="space-y-2">
-                        {param.options?.map((option) => (
-                          <label key={option} className="flex items-center space-x-3 p-2 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors">
-                            <input
-                              type="checkbox"
-                              checked={(parameters[param.id] || []).includes(option)}
-                              onChange={(e) => {
-                                const current = parameters[param.id] || [];
-                                const updated = e.target.checked
-                                  ? [...current, option]
-                                  : current.filter((item: string) => item !== option);
-                                handleParameterChange(param.id, updated);
-                              }}
-                              className="w-4 h-4 text-cyan-600 bg-slate-600 border-slate-500 rounded focus:ring-cyan-500"
-                            />
-                            <span className="text-sm text-white">{option}</span>
-                          </label>
-                        ))}
+                        {param.options?.map((option) => {
+                          const value = (parameters[param.id] as string[]) || [];
+                          return (
+                            <label key={option} className="flex items-center space-x-3 p-2 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors">
+                              <input
+                                type="checkbox"
+                                checked={value.includes(option)}
+                                onChange={(e) => {
+                                  const updated = e.target.checked
+                                    ? [...value, option]
+                                    : value.filter((item) => item !== option);
+                                  handleParameterChange(param.id, updated);
+                                }}
+                                className="w-4 h-4 text-cyan-600 bg-slate-600 border-slate-500 rounded focus:ring-cyan-500"
+                              />
+                              <span className="text-sm text-white">{option}</span>
+                            </label>
+                          );
+                        })}
                       </div>
                     )}
                     
