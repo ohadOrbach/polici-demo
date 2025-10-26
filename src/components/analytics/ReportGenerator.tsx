@@ -330,7 +330,7 @@ export default function ReportGenerator() {
                     
                     {param.type === 'select' && (
                       <select
-                        value={parameters[param.id] || ''}
+                        value={(parameters[param.id] as string) || ''}
                         onChange={(e) => handleParameterChange(param.id, e.target.value)}
                         className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                       >
