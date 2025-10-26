@@ -367,8 +367,8 @@ export default function ReportGenerator() {
                     
                     {param.type === 'daterange' && (() => {
                       const value = parameters[param.id];
-                      const dateRangeValue = typeof value === 'object' && value !== null && !Array.isArray(value) 
-                        ? (value as { from?: string; to?: string }) 
+                      const dateRangeValue = (typeof value === 'object' && value !== null && !Array.isArray(value))
+                        ? value as { from?: string; to?: string }
                         : {};
 
                       return (
@@ -378,10 +378,10 @@ export default function ReportGenerator() {
                             <input
                               type="date"
                               value={dateRangeValue.from || ''}
-                              onChange={(e) => handleParameterChange(param.id, {
-                                ...(dateRangeValue || {}),
-                                from: e.target.value
-                              })}
+                              onChange={(e) => {
+                                const newValue = { ...dateRangeValue, from: e.target.value };
+                                handleParameterChange(param.id, newValue);
+                              }}
                               className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                             />
                           </div>
@@ -390,10 +390,10 @@ export default function ReportGenerator() {
                             <input
                               type="date"
                               value={dateRangeValue.to || ''}
-                              onChange={(e) => handleParameterChange(param.id, {
-                                ...(dateRangeValue || {}),
-                                to: e.target.value
-                              })}
+                              onChange={(e) => {
+                                const newValue = { ...dateRangeValue, to: e.target.value };
+                                handleParameterChange(param.id, newValue);
+                              }}
                               className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                             />
                           </div>
