@@ -371,9 +371,14 @@ export default function ReportGenerator() {
                           <label className="block text-xs text-slate-400 mb-1">From Date</label>
                           <input
                             type="date"
-                            value={parameters[param.id]?.from || ''}
+                            value={
+                              typeof parameters[param.id] === 'object' &&
+                              'from' in parameters[param.id]
+                                ? (parameters[param.id] as { from: string }).from
+                                : ''
+                            }
                             onChange={(e) => handleParameterChange(param.id, {
-                              ...parameters[param.id],
+                              ...((typeof parameters[param.id] === 'object' && parameters[param.id]) || {}),
                               from: e.target.value
                             })}
                             className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
@@ -383,9 +388,14 @@ export default function ReportGenerator() {
                           <label className="block text-xs text-slate-400 mb-1">To Date</label>
                           <input
                             type="date"
-                            value={parameters[param.id]?.to || ''}
+                            value={
+                              typeof parameters[param.id] === 'object' &&
+                              'to' in parameters[param.id]
+                                ? (parameters[param.id] as { to: string }).to
+                                : ''
+                            }
                             onChange={(e) => handleParameterChange(param.id, {
-                              ...parameters[param.id],
+                              ...((typeof parameters[param.id] === 'object' && parameters[param.id]) || {}),
                               to: e.target.value
                             })}
                             className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
