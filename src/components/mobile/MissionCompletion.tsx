@@ -176,7 +176,7 @@ export default function MissionCompletion() {
   const totalSteps = mission.steps.length;
   const progressPercentage = (completedSteps / totalSteps) * 100;
 
-  const handleStepComplete = (stepId: string, data?: any) => {
+  const handleStepComplete = (stepId: string, data?: MissionStep['data']) => {
     setMission(prev => ({
       ...prev,
       steps: prev.steps.map(step => 
@@ -202,7 +202,7 @@ export default function MissionCompletion() {
   const handleMediaCapture = (type: 'photo' | 'video') => {
     if (type === 'photo') {
       // Simulate photo capture
-      const photoUrl = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=`;
+      const photoUrl = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxAAPwCdABmX/9k=`;
       setCapturedMedia(prev => [...prev, photoUrl]);
       handleStepComplete(currentStep.id, { photos: [...(currentStep.data?.photos || []), photoUrl] });
     } else {

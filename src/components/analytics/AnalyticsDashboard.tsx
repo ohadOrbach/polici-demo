@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   BarChart3, 
   TrendingUp, 
@@ -44,7 +44,7 @@ interface FleetMetric {
   value: string;
   change: number;
   trend: 'up' | 'down' | 'stable';
-  icon: any;
+  icon: React.ElementType;
   color: string;
 }
 

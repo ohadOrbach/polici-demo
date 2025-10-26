@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Ship, 
@@ -22,7 +22,7 @@ interface UserRole {
   id: string;
   name: string;
   description: string;
-  icon: any;
+  icon: React.ElementType;
   color: string;
   permissions: string[];
 }

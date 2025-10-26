@@ -1,5 +1,5 @@
 // Custom React hook for using mock API data
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mission, User, mockAPI } from '@/data/mockData';
 import { DashboardStats, FleetStatus, ComplianceAlert, MissionSummary } from '@/data/dashboardData';
 import dashboardData from '@/data/dashboardData';
@@ -7,7 +7,7 @@ import dashboardData from '@/data/dashboardData';
 // Generic hook for API calls with loading states
 export function useAsyncData<T>(
   apiCall: () => Promise<T>,
-  dependencies: any[] = []
+  dependencies: React.DependencyList = []
 ): { data: T | null; loading: boolean; error: string | null; refresh: () => void } {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);

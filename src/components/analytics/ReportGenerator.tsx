@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   FileText, 
   Download, 
@@ -32,9 +32,11 @@ interface ReportTemplate {
   description: string;
   category: 'compliance' | 'operational' | 'financial' | 'safety';
   estimatedTime: string;
-  icon: any;
+  icon: React.ElementType;
   color: string;
 }
+
+type ReportParameterValue = string | string[] | { from: string; to: string } | boolean;
 
 interface ReportParameter {
   id: string;
@@ -42,7 +44,17 @@ interface ReportParameter {
   type: 'select' | 'multiselect' | 'daterange' | 'checkbox' | 'text';
   required: boolean;
   options?: string[];
-  value?: any;
+  value?: ReportParameterValue;
+}
+
+interface GeneratedReport {
+  id: string;
+  template: string | undefined;
+  generatedAt: string;
+  parameters: { [key: string]: ReportParameterValue };
+  status: 'completed';
+  fileSize: string;
+  pages: number;
 }
 
 const reportTemplates: ReportTemplate[] = [
@@ -187,9 +199,9 @@ const reportParameters: { [key: string]: ReportParameter[] } = {
 
 export default function ReportGenerator() {
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
-  const [parameters, setParameters] = useState<{ [key: string]: any }>({});
+  const [parameters, setParameters] = useState<{ [key: string]: ReportParameterValue }>({});
   const [isGenerating, setIsGenerating] = useState(false);
-  const [generatedReport, setGeneratedReport] = useState<any>(null);
+  const [generatedReport, setGeneratedReport] = useState<GeneratedReport | null>(null);
 
   const handleTemplateSelect = (templateId: string) => {
     setSelectedTemplate(templateId);
@@ -197,7 +209,7 @@ export default function ReportGenerator() {
     setGeneratedReport(null);
   };
 
-  const handleParameterChange = (parameterId: string, value: any) => {
+  const handleParameterChange = (parameterId: string, value: ReportParameterValue) => {
     setParameters(prev => ({
       ...prev,
       [parameterId]: value
