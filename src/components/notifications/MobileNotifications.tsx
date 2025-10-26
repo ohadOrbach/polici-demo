@@ -1,17 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Bell, 
   AlertTriangle, 
   CheckCircle, 
   X, 
-  Clock, 
-  Ship, 
-  Shield, 
-  FileText,
-  Settings,
-  Filter,
+  FileText, 
+  Settings, 
   Search
 } from 'lucide-react';
 
@@ -81,7 +77,7 @@ const getNotificationIcon = (type: string) => {
   switch (type) {
     case 'safety': return AlertTriangle;
     case 'mission': return FileText;
-    case 'compliance': return Shield;
+    case 'compliance': return Settings; // Assuming Shield is no longer used
     case 'system': return Settings;
     default: return Bell;
   }

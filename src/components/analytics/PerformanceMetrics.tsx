@@ -2,25 +2,14 @@
 
 import { useState } from 'react';
 import { 
-  Activity,
-  Target,
-  Clock,
   TrendingUp,
   TrendingDown,
   CheckCircle,
   AlertTriangle,
   Ship,
-  Users,
-  Calendar,
-  BarChart3,
-  PieChart,
-  Gauge,
-  Award,
-  Zap,
-  Shield,
-  Timer,
   Download,
-  Filter
+  Filter,
+  FileText
 } from 'lucide-react';
 
 const kpiMetrics = [
@@ -33,7 +22,7 @@ const kpiMetrics = [
     target: '90',
     color: 'text-cyan-400',
     bgColor: 'bg-cyan-900/20',
-    icon: Target
+    icon: FileText
   },
   {
     title: 'Mission Success Rate',
@@ -55,7 +44,7 @@ const kpiMetrics = [
     target: '3.0',
     color: 'text-blue-400',
     bgColor: 'bg-blue-900/20',
-    icon: Timer
+    icon: FileText
   },
   {
     title: 'Compliance Rating',
@@ -66,7 +55,7 @@ const kpiMetrics = [
     target: '98',
     color: 'text-purple-400',
     bgColor: 'bg-purple-900/20',
-    icon: Shield
+    icon: FileText
   }
 ];
 
@@ -374,7 +363,7 @@ export default function PerformanceMetrics() {
         <div className="bg-slate-800/80 rounded-2xl p-6 border border-slate-700">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 bg-green-900/30 rounded-xl flex items-center justify-center">
-              <Award className="h-5 w-5 text-green-400" />
+              <FileText className="h-5 w-5 text-green-400" />
             </div>
             <h3 className="text-lg font-semibold text-white">Top Performers</h3>
           </div>
@@ -397,7 +386,7 @@ export default function PerformanceMetrics() {
         <div className="bg-slate-800/80 rounded-2xl p-6 border border-slate-700">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 bg-yellow-900/30 rounded-xl flex items-center justify-center">
-              <Zap className="h-5 w-5 text-yellow-400" />
+              <FileText className="h-5 w-5 text-yellow-400" />
             </div>
             <h3 className="text-lg font-semibold text-white">Improvements</h3>
           </div>

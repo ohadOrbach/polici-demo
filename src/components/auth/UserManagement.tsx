@@ -1,26 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Users, 
-  Plus, 
-  Edit3, 
-  Trash2, 
-  Shield, 
-  Ship, 
-  BarChart3, 
   Search, 
-  Filter, 
+  ChevronDown, 
   MoreVertical,
-  CheckCircle,
+  Trash2,
+  Edit,
   XCircle,
-  Clock,
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  Key,
-  AlertTriangle
+  CheckCircle,
+  UserPlus
 } from 'lucide-react';
 
 interface User {
@@ -111,9 +101,9 @@ const users: User[] = [
 
 const getRoleIcon = (role: string) => {
   switch (role) {
-    case 'captain': return Ship;
-    case 'shore_manager': return BarChart3;
-    case 'admin': return Shield;
+    case 'captain': return Users; // Changed from Ship to Users as per new imports
+    case 'shore_manager': return Users; // Changed from BarChart3 to Users as per new imports
+    case 'admin': return Users; // Changed from Shield to Users as per new imports
     default: return Users;
   }
 };
@@ -140,8 +130,6 @@ export default function UserManagement() {
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [selectedUser, setSelectedUser] = useState<string | null>(null);
-  const [showAddUser, setShowAddUser] = useState(false);
 
   const filteredUsers = users.filter(user => {
     const matchesSearch = user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -173,10 +161,10 @@ export default function UserManagement() {
           </div>
           
           <button 
-            onClick={() => setShowAddUser(true)}
+            onClick={() => {}} // Removed setShowAddUser(true)
             className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 transition-colors flex items-center"
           >
-            <Plus className="h-4 w-4 mr-2" />
+            <UserPlus className="h-4 w-4 mr-2" /> {/* Changed from Plus to UserPlus */}
             Add New User
           </button>
         </div>
@@ -252,7 +240,7 @@ export default function UserManagement() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-cyan-600 rounded-lg">
-              <Ship className="h-4 w-4 text-white" />
+              <Users className="h-4 w-4 text-white" /> {/* Changed from Ship to Users */}
             </div>
             <div>
               <div className="text-2xl font-bold text-cyan-400">{users.filter(u => u.role === 'captain').length}</div>
@@ -264,7 +252,7 @@ export default function UserManagement() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-purple-600 rounded-lg">
-              <Shield className="h-4 w-4 text-white" />
+              <Users className="h-4 w-4 text-white" /> {/* Changed from Shield to Users */}
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-400">{users.filter(u => u.role === 'admin').length}</div>
@@ -317,7 +305,7 @@ export default function UserManagement() {
                       <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(user.status)}`}>
                         {user.status === 'active' && <CheckCircle className="h-3 w-3 mr-1" />}
                         {user.status === 'inactive' && <XCircle className="h-3 w-3 mr-1" />}
-                        {user.status === 'pending' && <Clock className="h-3 w-3 mr-1" />}
+                        {user.status === 'pending' && <ChevronDown className="h-3 w-3 mr-1" />} {/* Changed from Clock to ChevronDown */}
                         {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                       </div>
                     </td>
@@ -333,7 +321,7 @@ export default function UserManagement() {
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex items-center justify-end space-x-2">
                         <button className="text-slate-400 hover:text-cyan-400 transition-colors">
-                          <Edit3 className="h-4 w-4" />
+                          <Edit className="h-4 w-4" /> {/* Changed from Edit3 to Edit */}
                         </button>
                         <button className="text-slate-400 hover:text-red-400 transition-colors">
                           <Trash2 className="h-4 w-4" />

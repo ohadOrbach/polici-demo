@@ -8,13 +8,11 @@ import {
   Eye, 
   EyeOff, 
   LogIn, 
-  Anchor,
-  Waves,
   AlertTriangle,
-  CheckCircle,
-  Smartphone,
+  Waves,
   Fingerprint,
-  Shield
+  Shield,
+  Anchor
 } from 'lucide-react';
 
 interface MobileLoginProps {

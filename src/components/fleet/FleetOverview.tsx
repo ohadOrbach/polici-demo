@@ -1,25 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Ship, 
-  MapPin, 
   Users, 
+  MapPin, 
   AlertTriangle, 
-  CheckCircle, 
-  Clock, 
-  Anchor,
-  Navigation,
-  Fuel,
-  Shield,
-  Radio,
-  Eye,
-  Filter,
-  Search,
-  MoreVertical,
-  Send,
-  Calendar,
-  Activity
+  ChevronDown,
+  Search
 } from 'lucide-react';
 
 interface Vessel {
@@ -171,7 +159,7 @@ const fleetData: Vessel[] = [
     systems: {
       navigation: 'operational',
       communication: 'operational',
-      engine: 'maintenance',
+      engine: 'warning',
       safety: 'operational'
     },
     nextPort: 'Los Angeles',
@@ -283,9 +271,9 @@ const getVesselTypeIcon = (type: string) => {
   switch (type) {
     case 'cargo': return Ship;
     case 'container': return Ship;
-    case 'tanker': return Fuel;
+    case 'tanker': return Ship; // Changed from Fuel to Ship
     case 'passenger': return Users;
-    case 'research': return Activity;
+    case 'research': return Ship; // Changed from Activity to Ship
     default: return Ship;
   }
 };
@@ -334,7 +322,7 @@ export default function FleetOverview() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-green-600 rounded-lg">
-              <Navigation className="h-4 w-4 text-white" />
+              <Ship className="h-4 w-4 text-white" /> {/* Changed from Navigation to Ship */}
             </div>
             <div>
               <div className="text-2xl font-bold text-green-400">{fleetStats.active}</div>
@@ -346,7 +334,7 @@ export default function FleetOverview() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-blue-600 rounded-lg">
-              <Anchor className="h-4 w-4 text-white" />
+              <Ship className="h-4 w-4 text-white" /> {/* Changed from Anchor to Ship */}
             </div>
             <div>
               <div className="text-2xl font-bold text-blue-400">{fleetStats.docked}</div>
@@ -370,7 +358,7 @@ export default function FleetOverview() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-purple-600 rounded-lg">
-              <Clock className="h-4 w-4 text-white" />
+              <Ship className="h-4 w-4 text-white" /> {/* Changed from Clock to Ship */}
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-400">{fleetStats.totalMissions}</div>
@@ -394,7 +382,7 @@ export default function FleetOverview() {
         <div className="bg-slate-800 rounded-2xl p-4 border border-slate-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-green-600 rounded-lg">
-              <Shield className="h-4 w-4 text-white" />
+              <Ship className="h-4 w-4 text-white" /> {/* Changed from Shield to Ship */}
             </div>
             <div>
               <div className="text-2xl font-bold text-green-400">{fleetStats.avgCompliance}%</div>
@@ -492,7 +480,7 @@ export default function FleetOverview() {
                   </div>
                   
                   <button className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors">
-                    <MoreVertical className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4" />
                   </button>
                 </div>
 
@@ -552,14 +540,14 @@ export default function FleetOverview() {
                 {/* Quick Actions */}
                 <div className="flex space-x-2">
                   <button className="flex-1 py-2 bg-cyan-600 text-white rounded-lg text-sm font-medium hover:bg-cyan-700 transition-colors flex items-center justify-center">
-                    <Send className="h-3 w-3 mr-1" />
+                    {/* Removed Send icon */}
                     Assign Mission
                   </button>
                   <button className="px-3 py-2 bg-slate-700 text-slate-300 rounded-lg text-sm font-medium hover:bg-slate-600 transition-colors">
-                    <Eye className="h-3 w-3" />
+                    {/* Removed Eye icon */}
                   </button>
                   <button className="px-3 py-2 bg-slate-700 text-slate-300 rounded-lg text-sm font-medium hover:bg-slate-600 transition-colors">
-                    <Radio className="h-3 w-3" />
+                    {/* Removed Radio icon */}
                   </button>
                 </div>
               </div>
@@ -628,15 +616,15 @@ export default function FleetOverview() {
                   {/* Extended Actions */}
                   <div className="flex flex-wrap gap-2 mt-6">
                     <button className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors flex items-center">
-                      <Calendar className="h-3 w-3 mr-1" />
+                      {/* Removed Calendar icon */}
                       Schedule Inspection
                     </button>
                     <button className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center">
-                      <Radio className="h-3 w-3 mr-1" />
+                      {/* Removed Radio icon */}
                       Contact Vessel
                     </button>
                     <button className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors flex items-center">
-                      <Eye className="h-3 w-3 mr-1" />
+                      {/* Removed Eye icon */}
                       View Details
                     </button>
                   </div>

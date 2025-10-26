@@ -6,17 +6,9 @@ import {
   Ship, 
   Clock, 
   CheckCircle, 
-  AlertTriangle, 
-  User, 
-  Calendar,
-  FileText,
-  Download,
   ArrowLeft,
-  BarChart3,
   MapPin,
-  Users,
-  Activity,
-  Target
+  Calendar
 } from 'lucide-react';
 
 interface ShipProgress {
@@ -201,7 +193,6 @@ export default function MissionViewDetail({ missionId }: MissionViewDetailProps)
               {missionDetail.priority.toUpperCase()}
             </span>
             <button className="flex items-center space-x-2 px-4 py-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors">
-              <Download className="h-4 w-4" />
               <span>Export Report</span>
             </button>
           </div>
@@ -229,7 +220,6 @@ export default function MissionViewDetail({ missionId }: MissionViewDetailProps)
           
           <div className="bg-slate-900/50 rounded-xl p-4">
             <div className="flex items-center space-x-3 mb-2">
-              <Target className="h-5 w-5 text-purple-400" />
               <span className="text-slate-400 text-sm">Overall Progress</span>
             </div>
             <div className="text-2xl font-bold text-white">{missionDetail.overallProgress}%</div>
@@ -305,7 +295,6 @@ export default function MissionViewDetail({ missionId }: MissionViewDetailProps)
                     
                     <div className="flex items-center space-x-4 text-sm text-slate-400 mb-2">
                       <div className="flex items-center space-x-1">
-                        <User className="h-3 w-3" />
                         <span>{ship.captain}</span>
                       </div>
                       <div className="flex items-center space-x-1">

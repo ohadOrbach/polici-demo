@@ -2,15 +2,11 @@
 
 import React, { useState } from 'react';
 import { 
-  BarChart3, 
   TrendingUp, 
   TrendingDown, 
-  Shield, 
   AlertTriangle, 
-  CheckCircle, 
   Calendar, 
   Download, 
-  Filter, 
   RefreshCw,
   Users,
   Ship,
@@ -18,7 +14,6 @@ import {
   Clock,
   MapPin,
   FileText,
-  PieChart,
   Activity,
   Target,
   Award,
@@ -227,9 +222,7 @@ const getTrendColor = (trend: string) => {
 
 export default function AnalyticsDashboard() {
   const [selectedTimeframe, setSelectedTimeframe] = useState('30d');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showFilters, setShowFilters] = useState(false);
-
+  
   const overallCompliance = Math.round(
     complianceMetrics.reduce((sum, metric) => sum + metric.score, 0) / complianceMetrics.length
   );
@@ -428,7 +421,7 @@ export default function AnalyticsDashboard() {
 
         {/* Simplified Chart Representation */}
         <div className="space-y-4">
-          {monthlyTrendData.slice(-6).map((data, index) => (
+          {monthlyTrendData.slice(-6).map((data) => (
             <div key={data.month} className="flex items-center space-x-4">
               <div className="w-12 text-sm text-slate-400 font-medium">{data.month}</div>
               

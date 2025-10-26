@@ -665,7 +665,7 @@ export const mockMissions: Mission[] = [
     priority: 'medium',
     estimatedDuration: '35 min',
     status: 'overdue',
-    type: 'security',
+    type: 'safety',
     offline: true,
     progress: 0,
     taskNotes: '',
@@ -842,10 +842,11 @@ export const mockAPI = {
   }
 };
 
-// Export default mock data for easy imports
-export default {
-  users: mockUsers,
-  missions: mockMissions,
-  vessels: mockVessels,
-  api: mockAPI
+const mockData = {
+  mockAPI,
+  mockUsers,
+  mockMissions,
+  mockVessels
 };
+
+export default mockData;

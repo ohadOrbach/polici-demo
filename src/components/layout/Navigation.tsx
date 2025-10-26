@@ -1,16 +1,15 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
-  BarChart3, 
-  FileText, 
   Ship, 
-  Users, 
-  Bell,
-  Home,
-  LogOut,
-  Smartphone
+  FileText, 
+  BarChart3,
+  Users,
+  Smartphone,
+  LogOut
 } from 'lucide-react';
 import NotificationBell from '@/components/notifications/NotificationBell';
 

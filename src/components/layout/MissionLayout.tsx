@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Ship, BarChart3, FileText, Users, Settings, Bell, Upload, Plus } from 'lucide-react';
+import { Ship, FileText, BarChart3, Upload, Bell } from 'lucide-react';
 import { useRef } from 'react';
 
 const navigationItems = [

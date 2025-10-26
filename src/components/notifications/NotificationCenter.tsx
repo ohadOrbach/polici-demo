@@ -1,27 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { 
-  Bell, 
-  X, 
-  AlertTriangle, 
-  CheckCircle, 
-  Info, 
-  Clock, 
-  Ship, 
-  Shield, 
-  FileText, 
-  Users, 
-  Settings,
-  Filter,
-  Mail,
-  Trash2,
-  Eye,
-  EyeOff,
-  Calendar,
-  MapPin,
-  Anchor
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { Bell, X, AlertTriangle, CheckCircle, Info, Ship, Shield, FileText, Users, Settings, Mail, Trash2, Eye, EyeOff } from 'lucide-react';
 
 interface Notification {
   id: string;

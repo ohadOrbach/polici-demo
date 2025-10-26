@@ -4,18 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
-  Home, 
   FileText, 
-  Ship, 
-  CheckCircle, 
-  User,
   Menu,
   X,
   Anchor,
   Signal,
   Battery,
   Wifi,
-  BarChart3,
   Monitor
 } from 'lucide-react';
 
@@ -26,15 +21,11 @@ const bottomNavItems = [
 interface MobileLayoutProps {
   children: React.ReactNode;
   title?: string;
-  showBackButton?: boolean;
-  onBack?: () => void;
 }
 
 export default function MobileLayout({ 
   children, 
-  title = "Captain's Interface",
-  showBackButton = false,
-  onBack 
+  title
 }: MobileLayoutProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

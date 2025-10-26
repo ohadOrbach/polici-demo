@@ -9,12 +9,15 @@ export type {
   User,
   Mission,
   TaskCheckbox,
-  TaskNote,
+  TaskNote
+} from './mockData';
+
+export type {
   DashboardStats,
   FleetStatus,
   ComplianceAlert,
   MissionSummary
-} from './mockData';
+} from './dashboardData';
 
 // Re-export API functions
 export { mockAPI } from './mockData';

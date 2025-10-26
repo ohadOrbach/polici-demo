@@ -13,7 +13,6 @@ import {
   ChevronUp,
   Users,
   MapPin,
-  Calendar,
   Star,
   Shield,
   User,
@@ -22,7 +21,6 @@ import {
   Video,
   Paperclip,
   Edit3,
-  Circle,
   Upload,
   X,
   Save
@@ -86,7 +84,7 @@ const tasks: InteractiveTask[] = mockMissions.slice(0, 6).map(mission => ({
   estimatedDuration: mission.estimatedDuration,
   offline: mission.offline,
   progress: mission.progress,
-  type: mission.type === 'compliance' || mission.type === 'security' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
+  type: mission.type === 'compliance' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
   checkboxes: mission.checkboxes.map(cb => ({
     id: cb.id,
     text: cb.text,

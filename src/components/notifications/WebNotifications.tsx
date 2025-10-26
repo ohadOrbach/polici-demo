@@ -1,17 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Bell, 
   AlertTriangle, 
   CheckCircle, 
   Info, 
-  Clock, 
-  Ship, 
-  Shield, 
   FileText, 
   Settings,
-  Filter,
   Search,
   Mail,
   Trash2,
@@ -91,7 +87,7 @@ const getNotificationIcon = (type: string) => {
   switch (type) {
     case 'safety': return AlertTriangle;
     case 'mission': return FileText;
-    case 'compliance': return Shield;
+    case 'compliance': return AlertTriangle; // Changed from Shield to AlertTriangle for consistency
     case 'system': return Settings;
     default: return Info;
   }

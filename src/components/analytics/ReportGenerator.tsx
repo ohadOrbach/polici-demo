@@ -4,13 +4,9 @@ import React, { useState } from 'react';
 import { 
   FileText, 
   Download, 
-  Calendar, 
-  Filter, 
-  Send, 
   Eye, 
   Settings,
   CheckSquare,
-  Square,
   Ship,
   Users,
   Shield,
@@ -18,12 +14,8 @@ import {
   Lock,
   Briefcase,
   BarChart3,
-  PieChart,
-  TrendingUp,
   Clock,
-  Mail,
-  Printer,
-  Save
+  Mail
 } from 'lucide-react';
 
 interface ReportTemplate {
@@ -405,7 +397,7 @@ export default function ReportGenerator() {
                       <label className="flex items-center space-x-3 p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors cursor-pointer">
                         <input
                           type="checkbox"
-                          checked={parameters[param.id] || false}
+                          checked={typeof parameters[param.id] === 'boolean' ? (parameters[param.id] as boolean) : false}
                           onChange={(e) => handleParameterChange(param.id, e.target.checked)}
                           className="w-4 h-4 text-cyan-600 bg-slate-600 border-slate-500 rounded focus:ring-cyan-500"
                         />
@@ -416,7 +408,7 @@ export default function ReportGenerator() {
                     {param.type === 'text' && (
                       <input
                         type="text"
-                        value={parameters[param.id] || ''}
+                        value={(parameters[param.id] as string) || ''}
                         onChange={(e) => handleParameterChange(param.id, e.target.value)}
                         className="w-full p-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                         placeholder={`Enter ${param.label.toLowerCase()}`}

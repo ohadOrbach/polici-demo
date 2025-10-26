@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { 
   AlertTriangle, 
   X, 
@@ -9,7 +10,6 @@ import {
   Info,
   Ship,
   MapPin,
-  Users,
   Calendar
 } from 'lucide-react';
 

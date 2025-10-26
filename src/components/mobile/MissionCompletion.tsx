@@ -1,31 +1,22 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import NextImage from 'next/image';
 import { 
   CheckCircle, 
   Camera, 
   Video, 
   FileText, 
   Upload, 
-  X, 
-  Play, 
-  Pause, 
-  Square, 
-  RotateCcw,
   Send,
   Save,
   Clock,
   User,
   MapPin,
-  AlertTriangle,
   CheckSquare,
   Circle,
   Edit3,
-  Mic,
-  MicOff,
-  Image,
   Film,
-  Paperclip,
   PenTool
 } from 'lucide-react';
 
@@ -160,17 +151,12 @@ const getPriorityColor = (priority: string) => {
 export default function MissionCompletion() {
   const [mission, setMission] = useState<Mission>(sampleMission);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordingType, setRecordingType] = useState<'video' | 'audio' | null>(null);
-  const [showCamera, setShowCamera] = useState(false);
-  const [capturedMedia, setCapturedMedia] = useState<string[]>([]);
   const [notes, setNotes] = useState('');
   const [signature, setSignature] = useState('');
   const [showSignaturePad, setShowSignaturePad] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
+  
   const currentStep = mission.steps[currentStepIndex];
   const completedSteps = mission.steps.filter(step => step.completed).length;
   const totalSteps = mission.steps.length;
@@ -203,12 +189,10 @@ export default function MissionCompletion() {
     if (type === 'photo') {
       // Simulate photo capture
       const photoUrl = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxAAPwCdABmX/9k=`;
-      setCapturedMedia(prev => [...prev, photoUrl]);
       handleStepComplete(currentStep.id, { photos: [...(currentStep.data?.photos || []), photoUrl] });
     } else {
       // Simulate video capture
       const videoUrl = 'data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAr3mZGF0AAACrgYF//+q3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE1NSByMjkwMSA3ZDBmZjIyIC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAxOCAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTYgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYmZyYW1lcz0zIGJfcHlyYW1pZD0yIGJfYWRhcHQ9MSBiX2JpYXM9MCBkaXJlY3Q9MSB3ZWlnaHRiPTEgb3Blbl9nb3A9MCB3ZWlnaHRwPTIga2V5aW50PTI1MCBrZXlpbnRfbWluPTI1IHNjZW5lY3V0PTQwIGludHJhX3JlZnJlc2g9MCByY19sb29rYWhlYWQ9NDAgcmM9Y3JmIG1idHJlZT0xIGNyZj0yMy4wIHFjb21wPTAuNjAgcXBtaW49MCBxcG1heD02OSBxcHN0ZXA9NCBpcF9yYXRpbz0xLjQwIGFxPTE6MS4wMACAAAABWWWIhAA3//728P4FNjuY0JcRzMheBA==';
-      setCapturedMedia(prev => [...prev, videoUrl]);
       handleStepComplete(currentStep.id, { videos: [...(currentStep.data?.videos || []), videoUrl] });
     }
   };
@@ -220,7 +204,6 @@ export default function MissionCompletion() {
         const reader = new FileReader();
         reader.onload = (e) => {
           const result = e.target?.result as string;
-          setCapturedMedia(prev => [...prev, result]);
           
           if (file.type.startsWith('image/')) {
             handleStepComplete(currentStep.id, { 
@@ -273,7 +256,6 @@ export default function MissionCompletion() {
                       const updatedItems = currentStep.data?.checklistItems?.map(i => 
                         i.id === item.id ? { ...i, checked: !i.checked } : i
                       );
-                      const allChecked = updatedItems?.every(i => i.checked);
                       handleStepComplete(currentStep.id, { checklistItems: updatedItems });
                     }}
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
@@ -320,7 +302,7 @@ export default function MissionCompletion() {
                 <div className="grid grid-cols-3 gap-2">
                   {currentStep.data.photos.map((photo, index) => (
                     <div key={index} className="relative aspect-square bg-slate-700 rounded-lg overflow-hidden">
-                      <Image className="h-full w-full text-slate-400" />
+                      <NextImage src={photo} alt={`Photo ${index + 1}`} layout="fill" objectFit="cover" />
                       <div className="absolute inset-0 bg-green-600/20 flex items-center justify-center">
                         <CheckCircle className="h-6 w-6 text-green-400" />
                       </div>

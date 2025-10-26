@@ -4,17 +4,15 @@ import { useState } from 'react';
 import { 
   TrendingUp, 
   TrendingDown, 
-  Calendar, 
   Filter, 
-  Download,
+  Download, 
   BarChart3,
+  Ship,
   LineChart,
-  PieChart,
-  Activity,
-  AlertTriangle,
   CheckCircle,
+  Activity,
   Clock,
-  Ship
+  AlertTriangle
 } from 'lucide-react';
 
 const trendMetrics = [

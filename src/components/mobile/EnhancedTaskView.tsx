@@ -1,23 +1,21 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import { 
   CheckCircle, 
   Camera, 
   Video, 
   FileText, 
   Upload, 
-  X, 
   Send,
   Save,
   Clock,
   User,
   MapPin,
   AlertTriangle,
-  CheckSquare,
   Circle,
   Edit3,
-  Image,
   Film,
   Paperclip,
   ArrowLeft,
@@ -97,108 +95,6 @@ const sampleTask: EnhancedTask = {
   startedAt: mockMissions[0].startedAt
 };
 
-// Keep original static sample as backup
-const staticSampleTask: EnhancedTask = {
-  id: 'task-001',
-  title: 'Emergency Safety Drill Compliance',
-  description: 'Complete comprehensive fire drill and muster procedures according to SOLAS regulations. Ensure all crew members participate and document the entire process.',
-  vessel: 'MV Northern Star',
-  assignedBy: {
-    name: 'Sarah Johnson',
-    role: 'Safety Manager',
-    avatar: '/avatars/sarah-j.jpg'
-  },
-  assignedTo: {
-    name: 'Captain Smith',
-    role: 'Ship Captain',
-    avatar: '/avatars/captain-smith.jpg'
-  },
-  dueDate: '2025-09-18T15:30:00Z',
-  priority: 'high',
-  estimatedDuration: '45 min',
-  status: 'in-progress',
-  taskNotes: '',
-  startedAt: '2025-09-17T14:15:00Z',
-  notes: [
-    {
-      id: 'note-1',
-      text: 'Please ensure all crew members are aware of the drill timing',
-      timestamp: '2025-09-17T10:00:00Z',
-      author: 'Safety Manager Johnson'
-    }
-  ],
-  checkboxes: [
-    {
-      id: 'check-1',
-      text: 'Sound General Alarm',
-      description: 'Activate the general alarm system and verify all crew can hear it clearly in all areas',
-      required: true,
-      checked: true,
-      type: 'checkbox'
-    },
-    {
-      id: 'check-2',
-      text: 'Crew Muster Documentation',
-      description: 'Take photos of crew at designated muster stations showing proper assembly',
-      required: true,
-      checked: false,
-      type: 'photo',
-      attachments: {
-        photos: []
-      }
-    },
-    {
-      id: 'check-3',
-      text: 'Safety Equipment Verification',
-      description: 'Record video walkthrough of safety equipment check including life jackets, fire extinguishers, and emergency exits',
-      required: true,
-      checked: false,
-      type: 'video',
-      attachments: {
-        videos: []
-      }
-    },
-    {
-      id: 'check-4',
-      text: 'Emergency Lighting Test',
-      description: 'Verify emergency lighting activation during drill',
-      required: true,
-      checked: false,
-      type: 'checkbox'
-    },
-    {
-      id: 'check-5',
-      text: 'Communication System Check',
-      description: 'Test all emergency communication devices',
-      required: false,
-      checked: false,
-      type: 'checkbox'
-    },
-    {
-      id: 'check-6',
-      text: 'Drill Report Documentation',
-      description: 'Upload completed drill report form',
-      required: true,
-      checked: false,
-      type: 'file',
-      attachments: {
-        files: []
-      }
-    },
-    {
-      id: 'check-7',
-      text: 'Captain Sign-off',
-      description: 'Digital signature to confirm drill completion and compliance',
-      required: true,
-      checked: false,
-      type: 'signature',
-      attachments: {
-        signature: ''
-      }
-    }
-  ]
-};
-
 const getCheckboxIcon = (type: string, checked: boolean) => {
   if (checked) return CheckCircle;
   
@@ -243,7 +139,6 @@ export default function EnhancedTaskView({
 }: EnhancedTaskViewProps) {
   const [currentTask, setCurrentTask] = useState<EnhancedTask>(task);
   const [expandedCheckbox, setExpandedCheckbox] = useState<string | null>(null);
-  const [showCamera, setShowCamera] = useState(false);
   const [showSignature, setShowSignature] = useState(false);
   const [signature, setSignature] = useState('');
   const [taskNotes, setTaskNotes] = useState(currentTask.taskNotes);
@@ -358,7 +253,7 @@ export default function EnhancedTaskView({
                 <div className="grid grid-cols-3 gap-2">
                   {checkbox.attachments.photos.map((photo, index) => (
                     <div key={index} className="relative aspect-square bg-slate-700 rounded-lg overflow-hidden">
-                      <Image className="h-full w-full text-slate-400 p-2" />
+                      <Image src={photo} alt={`Photo ${index + 1}`} layout="fill" objectFit="cover" />
                       <div className="absolute inset-0 bg-green-600/20 flex items-center justify-center">
                         <CheckCircle className="h-6 w-6 text-green-400" />
                       </div>

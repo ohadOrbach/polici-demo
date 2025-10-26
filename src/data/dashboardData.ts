@@ -331,10 +331,12 @@ export const dashboardUtils = {
   }
 };
 
-export default {
+const dashboardData = {
   stats: mockDashboardStats,
   fleetStatus: mockFleetStatus,
   alerts: mockComplianceAlerts,
   missionSummary: mockMissionSummary,
   utils: dashboardUtils
 };
+
+export default dashboardData;

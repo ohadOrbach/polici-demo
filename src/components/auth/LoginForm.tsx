@@ -10,8 +10,6 @@ import {
   EyeOff, 
   LogIn, 
   Shield, 
-  Anchor,
-  Navigation,
   AlertTriangle,
   CheckCircle,
   Users,

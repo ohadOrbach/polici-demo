@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   GripVertical, 
-  Check, 
   Edit, 
   Trash2, 
   Plus, 
@@ -13,8 +12,7 @@ import {
   Video,
   Paperclip,
   Edit3,
-  CheckSquare,
-  Circle
+  CheckSquare
 } from 'lucide-react';
 
 interface MissionItem {

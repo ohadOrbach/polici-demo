@@ -1,6 +1,6 @@
 // Custom React hook for using mock API data
-import React, { useState, useEffect } from 'react';
-import { Mission, User, mockAPI } from '@/data/mockData';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Mission, mockAPI } from '@/data/mockData';
 import { DashboardStats, FleetStatus, ComplianceAlert, MissionSummary } from '@/data/dashboardData';
 import dashboardData from '@/data/dashboardData';
 
@@ -13,7 +13,7 @@ export function useAsyncData<T>(
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -24,11 +24,12 @@ export function useAsyncData<T>(
     } finally {
       setLoading(false);
     }
-  };
+  }, [apiCall]);
 
   useEffect(() => {
     fetchData();
-  }, dependencies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchData, ...dependencies]);
 
   return { data, loading, error, refresh: fetchData };
 }
@@ -40,7 +41,8 @@ export function useMissions() {
 
 // Hook for fetching a specific mission
 export function useMission(id: string) {
-  return useAsyncData(() => mockAPI.getMission(id), [id]);
+  const apiCall = useCallback(() => mockAPI.getMission(id), [id]);
+  return useAsyncData(apiCall, [id]);
 }
 
 // Hook for fetching all users
@@ -50,7 +52,8 @@ export function useUsers() {
 
 // Hook for fetching a specific user
 export function useUser(id: string) {
-  return useAsyncData(() => mockAPI.getUser(id), [id]);
+  const apiCall = useCallback(() => mockAPI.getUser(id), [id]);
+  return useAsyncData(apiCall, [id]);
 }
 
 // Hook for dashboard statistics
@@ -216,7 +219,7 @@ export function useMissionStatistics() {
   return { statistics, loading, error };
 }
 
-export default {
+const useMockAPI = {
   useMissions,
   useMission,
   useUsers,
@@ -232,3 +235,5 @@ export default {
   useRealTimeMissions,
   useMissionStatistics
 };
+
+export default useMockAPI;

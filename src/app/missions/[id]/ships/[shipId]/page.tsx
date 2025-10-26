@@ -16,7 +16,7 @@ export default async function ShipMissionPage({ params }: ShipMissionPageProps) 
       title="Ship Mission Details" 
       description="View detailed mission progress for individual vessel"
     >
-      <ShipMissionDetail missionId={id} shipId={shipId} />
+      <ShipMissionDetail params={{ id, shipId }} />
     </PageLayout>
   );
 }

@@ -6,23 +6,19 @@ import {
   Ship, 
   Clock, 
   CheckCircle, 
-  AlertTriangle, 
   User, 
-  Calendar,
-  FileText,
-  Download,
-  ArrowLeft,
   MapPin,
-  Camera,
-  Paperclip,
-  MessageSquare,
-  Eye,
-  X,
+  ArrowLeft,
   ChevronDown,
   ChevronRight,
   Image,
   Video,
-  File
+  File,
+  Download,
+  MessageSquare,
+  Paperclip,
+  Eye,
+  X
 } from 'lucide-react';
 
 interface TaskItem {
@@ -291,12 +287,7 @@ const getAttachmentIcon = (type: string) => {
   }
 };
 
-interface ShipMissionDetailProps {
-  missionId: string;
-  shipId: string;
-}
-
-export default function ShipMissionDetail({ missionId, shipId }: ShipMissionDetailProps) {
+export default function ShipMissionDetail({ params }: { params: { id: string, shipId: string } }) {
   const [expandedTasks, setExpandedTasks] = useState<Set<string>>(new Set());
   const [selectedAttachment, setSelectedAttachment] = useState<Attachment | null>(null);
 
@@ -321,7 +312,7 @@ export default function ShipMissionDetail({ missionId, shipId }: ShipMissionDeta
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
             <Link 
-              href={`/missions/${missionId}/view`} 
+              href={`/missions/${params.id}/view`} 
               className="p-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />

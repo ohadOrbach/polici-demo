@@ -1,12 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   Ship, 
   Users, 
-  MapPin, 
   Clock, 
-  AlertTriangle, 
   CheckCircle, 
   Send, 
   X, 
@@ -15,9 +13,7 @@ import {
   Target,
   Zap,
   Shield,
-  Search,
-  Filter,
-  Plus
+  Search
 } from 'lucide-react';
 
 interface Mission {
@@ -263,7 +259,7 @@ export default function ShipAssignment() {
             onClick={() => setShowAssignmentModal(true)}
             className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-700 transition-colors flex items-center"
           >
-            <Plus className="h-4 w-4 mr-2" />
+            <Send className="h-4 w-4 mr-2" />
             Create New Mission
           </button>
         </div>
