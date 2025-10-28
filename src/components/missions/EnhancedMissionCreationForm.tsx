@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { 
   GripVertical, 
   Edit, 
@@ -14,6 +15,8 @@ import {
   Edit3,
   CheckSquare
 } from 'lucide-react';
+import { useMissions } from '@/contexts/MissionsContext';
+import { Mission } from '@/data/mockData';
 
 interface MissionItem {
   id: string;
@@ -25,6 +28,14 @@ interface MissionItem {
 }
 
 export default function EnhancedMissionCreationForm() {
+  const { addMission } = useMissions();
+  const router = useRouter();
+  
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [vessel, setVessel] = useState('');
+  const [dueDate, setDueDate] = useState('');
+
   const [missionItems, setMissionItems] = useState<MissionItem[]>([
     { id: '1', title: 'Pre-departure safety checks', type: 'checkbox', required: true, description: 'Complete all pre-departure safety procedures' },
     { id: '2', title: 'Safety drill documentation', type: 'photo', required: true, description: 'Take photos of crew at muster stations' },
@@ -43,6 +54,36 @@ export default function EnhancedMissionCreationForm() {
     type: 'checkbox',
     required: false
   });
+
+  const handlePublish = () => {
+    if (!title || !vessel || !dueDate) {
+      alert('Please fill out all mission fields.');
+      return;
+    }
+
+    const newMission: Omit<Mission, 'id' | 'createdAt' | 'updatedAt'> = {
+      title,
+      description,
+      vessel,
+      dueDate,
+      status: 'pending',
+      priority: 'medium', // Default priority
+      progress: 0,
+      offline: false, // Default offline status
+      type: 'maintenance', // Default type
+      estimatedDuration: '1h 30m', // Default duration
+      assignedBy: { name: 'Fleet Manager', role: 'Fleet Manager' },
+      assignedTo: { name: 'Ship Captain', role: 'Ship Captain' },
+      taskNotes: '',
+      checkboxes: missionItems.map(item => ({...item, checked: false}))
+    };
+    
+    // The context will handle adding id, createdAt, etc.
+    addMission(newMission as Mission);
+
+    // Redirect to dashboard after publishing
+    router.push('/dashboard');
+  };
 
   const addMissionItem = () => {
     if (!newItem.title?.trim()) return;
@@ -129,6 +170,8 @@ export default function EnhancedMissionCreationForm() {
         <input
           type="text"
           placeholder="Enter mission title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
         />
       </div>
@@ -141,6 +184,8 @@ export default function EnhancedMissionCreationForm() {
         <textarea
           rows={4}
           placeholder="Enter mission description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
         />
       </div>
@@ -151,7 +196,11 @@ export default function EnhancedMissionCreationForm() {
           <label className="block text-sm font-medium text-slate-300 mb-2">
             Vessel
           </label>
-          <select className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          <select 
+            value={vessel}
+            onChange={(e) => setVessel(e.target.value)}
+            className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+          >
             <option>Select a vessel</option>
             <option>MV Northern Star</option>
             <option>MV Ocean Explorer</option>
@@ -166,6 +215,8 @@ export default function EnhancedMissionCreationForm() {
           </label>
           <input
             type="datetime-local"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
             className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
           />
         </div>
@@ -329,7 +380,10 @@ export default function EnhancedMissionCreationForm() {
           <button className="px-6 py-3 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 font-medium transition-colors">
             Save Draft
           </button>
-          <button className="px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-medium transition-colors">
+          <button 
+            onClick={handlePublish}
+            className="px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 font-medium transition-colors"
+          >
             Publish Mission
           </button>
         </div>

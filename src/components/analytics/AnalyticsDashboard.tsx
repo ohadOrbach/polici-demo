@@ -470,36 +470,6 @@ export default function AnalyticsDashboard() {
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-        <h3 className="text-xl font-bold text-white mb-4">Quick Actions</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors flex flex-col items-center text-center">
-            <FileText className="h-6 w-6 text-cyan-400 mb-2" />
-            <span className="text-sm font-medium text-white">Generate Report</span>
-            <span className="text-xs text-slate-400">Custom compliance report</span>
-          </button>
-          
-          <button className="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors flex flex-col items-center text-center">
-            <Calendar className="h-6 w-6 text-green-400 mb-2" />
-            <span className="text-sm font-medium text-white">Schedule Audit</span>
-            <span className="text-xs text-slate-400">Plan compliance audit</span>
-          </button>
-          
-          <button className="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors flex flex-col items-center text-center">
-            <AlertTriangle className="h-6 w-6 text-yellow-400 mb-2" />
-            <span className="text-sm font-medium text-white">View Alerts</span>
-            <span className="text-xs text-slate-400">Compliance warnings</span>
-          </button>
-          
-          <button className="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl transition-colors flex flex-col items-center text-center">
-            <Settings className="h-6 w-6 text-purple-400 mb-2" />
-            <span className="text-sm font-medium text-white">Configure</span>
-            <span className="text-xs text-slate-400">Analytics settings</span>
-          </button>
-        </div>
-      </div>
-
       {/* Last Updated */}
       <div className="text-center text-sm text-slate-400">
         Analytics data last updated: {new Date().toLocaleString()} • Next refresh in 15 minutes

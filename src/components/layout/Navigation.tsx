@@ -15,7 +15,6 @@ import NotificationBell from '@/components/notifications/NotificationBell';
 
 const navigationItems = [
   { name: 'Dashboard', href: '/dashboard', icon: BarChart3 },
-  { name: 'Missions', href: '/missions', icon: FileText },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
 ];
 

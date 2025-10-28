@@ -22,6 +22,8 @@ import {
   Paperclip,
   Edit3
 } from 'lucide-react';
+import { useMissions } from '@/contexts/MissionsContext';
+import { Mission } from '@/data/mockData';
 
 interface TaskCheckbox {
   id: string;
@@ -58,38 +60,6 @@ interface EnhancedMission {
   totalRequired: number;
   totalOptional: number;
 }
-
-// Import mock data
-import { mockMissions } from '@/data/mockData';
-
-// Transform mock missions to EnhancedMission format
-const missions: EnhancedMission[] = mockMissions.slice(0, 4).map(mission => ({
-  id: parseInt(mission.id.split('_')[1]),
-  title: mission.title,
-  description: mission.description,
-  vessel: mission.vessel,
-  assignedBy: mission.assignedBy,
-  assignedTo: mission.assignedTo,
-  status: mission.status,
-  priority: mission.priority,
-  dueTime: new Date(mission.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-  estimatedDuration: mission.estimatedDuration,
-  offline: mission.offline,
-  progress: mission.progress,
-  type: mission.type === 'compliance' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
-  checkboxes: mission.checkboxes.map(cb => ({
-    id: cb.id,
-    text: cb.text,
-    description: cb.description,
-    required: cb.required,
-    checked: cb.checked,
-    type: cb.type
-  })),
-  notes: mission.taskNotes,
-  completedRequired: mission.checkboxes.filter(cb => cb.required && cb.checked).length,
-  totalRequired: mission.checkboxes.filter(cb => cb.required).length,
-  totalOptional: mission.checkboxes.filter(cb => !cb.required).length
-}));
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -141,6 +111,37 @@ const getCheckboxIcon = (type: string) => {
 };
 
 export default function EnhancedMobileMissionList() {
+  const { missions: rawMissions } = useMissions();
+  
+  // Transform mock missions to EnhancedMission format
+  const missions: EnhancedMission[] = rawMissions.map((mission: Mission) => ({
+    id: parseInt(mission.id.split('_')[1]),
+    title: mission.title,
+    description: mission.description,
+    vessel: mission.vessel,
+    assignedBy: mission.assignedBy,
+    assignedTo: mission.assignedTo,
+    status: mission.status,
+    priority: mission.priority,
+    dueTime: new Date(mission.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+    estimatedDuration: mission.estimatedDuration,
+    offline: mission.offline,
+    progress: mission.progress,
+    type: mission.type === 'compliance' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
+    checkboxes: mission.checkboxes.map(cb => ({
+      id: cb.id,
+      text: cb.text,
+      description: cb.description,
+      required: cb.required,
+      checked: cb.checked,
+      type: cb.type
+    })),
+    notes: mission.taskNotes,
+    completedRequired: mission.checkboxes.filter(cb => cb.required && cb.checked).length,
+    totalRequired: mission.checkboxes.filter(cb => cb.required).length,
+    totalOptional: mission.checkboxes.filter(cb => !cb.required).length
+  }));
+
   const [expandedMission, setExpandedMission] = useState<number | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
 

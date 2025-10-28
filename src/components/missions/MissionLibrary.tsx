@@ -1,55 +1,7 @@
-import { Search, Filter, MoreVertical, Calendar, Users, Ship, Eye, Edit, Copy, Trash2 } from 'lucide-react';
+'use client';
 
-const missions = [
-  {
-    id: 'MSN-2024-001',
-    title: 'Emergency Muster Drill',
-    description: 'Weekly emergency muster and abandon ship drill for all crew members',
-    status: 'active',
-    assignedVessels: ['MV Atlantic Star', 'MV Pacific Queen'],
-    dueDate: '2025-09-20',
-    completionRate: 85,
-    priority: 'high',
-    category: 'Safety',
-    lastModified: '2 hours ago'
-  },
-  {
-    id: 'MSN-2024-002', 
-    title: 'Navigation System Check',
-    description: 'Monthly inspection and testing of all navigation equipment',
-    status: 'completed',
-    assignedVessels: ['MV Northern Wind'],
-    dueDate: '2025-09-18',
-    completionRate: 100,
-    priority: 'medium',
-    category: 'Equipment',
-    lastModified: '1 day ago'
-  },
-  {
-    id: 'MSN-2024-003',
-    title: 'Port State Control Preparation',
-    description: 'Prepare vessel for upcoming port state control inspection',
-    status: 'draft',
-    assignedVessels: ['MV Southern Cross'],
-    dueDate: '2025-09-25',
-    completionRate: 0,
-    priority: 'critical',
-    category: 'Compliance',
-    lastModified: '3 days ago'
-  },
-  {
-    id: 'MSN-2024-004',
-    title: 'Cargo Securing Training',
-    description: 'Training session on proper cargo securing techniques and equipment',
-    status: 'in-progress',
-    assignedVessels: ['MV Eastern Dawn', 'MV Western Explorer'],
-    dueDate: '2025-09-22',
-    completionRate: 60,
-    priority: 'medium',
-    category: 'Training',
-    lastModified: '5 hours ago'
-  }
-];
+import { Search, Filter, MoreVertical, Calendar, Users, Ship, Eye, Edit, Copy, Trash2 } from 'lucide-react';
+import { useMissions } from '@/contexts/MissionsContext';
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -72,6 +24,8 @@ const getPriorityColor = (priority: string) => {
 };
 
 export default function MissionLibrary() {
+  const { missions } = useMissions();
+
   return (
     <div>
       <div className="mb-8">
@@ -150,7 +104,7 @@ export default function MissionLibrary() {
                       <Ship className="h-4 w-4 text-ocean-600" />
                       <div>
                         <div className="text-body-sm font-semibold text-navy-700">Assigned Vessels</div>
-                        <div className="text-xs text-ocean-600">{mission.assignedVessels.join(', ')}</div>
+                        <div className="text-xs text-ocean-600">{mission.vessel}</div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -164,7 +118,7 @@ export default function MissionLibrary() {
                       <Users className="h-4 w-4 text-ocean-600" />
                       <div>
                         <div className="text-body-sm font-semibold text-navy-700">Completion</div>
-                        <div className="text-xs text-ocean-600">{mission.completionRate}%</div>
+                        <div className="text-xs text-ocean-600">{mission.progress}%</div>
                       </div>
                     </div>
                   </div>
@@ -174,12 +128,12 @@ export default function MissionLibrary() {
                     <div className="mb-4">
                       <div className="flex items-center justify-between text-xs text-navy-600 mb-1">
                         <span>Progress</span>
-                        <span>{mission.completionRate}%</span>
+                        <span>{mission.progress}%</span>
                       </div>
                       <div className="w-full bg-ocean-200 rounded-full h-2">
                         <div 
                           className="bg-gradient-to-r from-ocean-500 to-ocean-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${mission.completionRate}%` }}
+                          style={{ width: `${mission.progress}%` }}
                         ></div>
                       </div>
                     </div>
@@ -188,10 +142,10 @@ export default function MissionLibrary() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <span className="px-3 py-1 bg-ocean-100 text-ocean-800 rounded-full text-xs font-semibold">
-                        {mission.category}
+                        {mission.type}
                       </span>
                       <span className="text-xs text-navy-500">
-                        Modified {mission.lastModified}
+                        Modified {new Date(mission.updatedAt).toLocaleDateString()}
                       </span>
                     </div>
 
