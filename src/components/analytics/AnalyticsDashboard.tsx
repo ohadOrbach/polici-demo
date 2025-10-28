@@ -5,7 +5,6 @@ import {
   TrendingUp, 
   TrendingDown, 
   AlertTriangle, 
-  Calendar, 
   Download, 
   RefreshCw,
   Users,
@@ -17,8 +16,7 @@ import {
   Activity,
   Target,
   Award,
-  Eye,
-  Settings
+  Eye
 } from 'lucide-react';
 
 interface ComplianceMetric {

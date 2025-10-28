@@ -72,10 +72,18 @@ export default function EnhancedMissionCreationForm() {
       offline: false, // Default offline status
       type: 'maintenance', // Default type
       estimatedDuration: '1h 30m', // Default duration
-      assignedBy: { name: 'Fleet Manager', role: 'Fleet Manager' },
-      assignedTo: { name: 'Ship Captain', role: 'Ship Captain' },
+      assignedBy: { id: 'user_001', name: 'Fleet Manager', role: 'Fleet Manager' },
+      assignedTo: { id: 'user_002', name: 'Ship Captain', role: 'Ship Captain' },
+      notes: [],
       taskNotes: '',
-      checkboxes: missionItems.map(item => ({...item, checked: false}))
+      checkboxes: missionItems.map(item => ({
+        id: item.id,
+        text: item.title,
+        description: item.description,
+        type: item.type,
+        required: item.required,
+        checked: false
+      }))
     };
     
     // The context will handle adding id, createdAt, etc.
