@@ -1,20 +1,10 @@
 import PageLayout from '@/components/layout/PageLayout';
 import MissionViewDetail from '@/components/missions/MissionViewDetail';
 
-interface MissionViewPageProps {
-  params: Promise<{
-    id: string;
-  }>;
-}
-
-export default async function MissionViewPage({ params }: MissionViewPageProps) {
-  const { id } = await params;
-  
+export default async function MissionViewPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   return (
-    <PageLayout 
-      title="Mission Details" 
-      description="View mission progress across assigned vessels"
-    >
+    <PageLayout>
       <MissionViewDetail missionId={id} />
     </PageLayout>
   );

@@ -1,14 +1,6 @@
-import { Ship, Compass, Anchor, Navigation, Zap, MapPin } from 'lucide-react';
+import { Compass, Anchor, Navigation, Zap } from 'lucide-react';
 
 const stats = [
-  {
-    name: 'Fleet Vessels',
-    value: '24',
-    change: '+2',
-    changeType: 'positive',
-    icon: Ship,
-    gradient: 'from-cyan-600 to-cyan-700'
-  },
   {
     name: 'Active Missions',
     value: '156',
@@ -34,14 +26,6 @@ const stats = [
     gradient: 'from-red-600 to-red-700'
   },
   {
-    name: 'Harbor Review',
-    value: '18',
-    change: '+3',
-    changeType: 'neutral',
-    icon: MapPin,
-    gradient: 'from-cyan-600 to-cyan-700'
-  },
-  {
     name: 'Maritime Compliance',
     value: '94.2%',
     change: '+1.2%',
@@ -54,15 +38,7 @@ const stats = [
 export default function DashboardStats() {
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-h2 text-white mb-2 flex items-center">
-          <Compass className="h-8 w-8 mr-3 text-cyan-400" />
-          🚢 Fleet Command Status
-        </h2>
-        <p className="text-body text-slate-400">Maritime performance indicators across all vessels and operations</p>
-      </div>
-      
-      <div className="grid-auto-fit">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
         {stats.map((stat, index) => (
           <div key={stat.name} className="bg-slate-800 hover:bg-slate-700 hover:shadow-2xl p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 backdrop-blur-sm transition-all duration-300">
             <div className="flex items-center justify-between mb-4">

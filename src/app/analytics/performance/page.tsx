@@ -4,10 +4,7 @@ import PerformanceMetrics from '@/components/analytics/PerformanceMetrics';
 
 export default function PerformancePage() {
   return (
-    <PageLayout 
-      title="Performance Metrics" 
-      description="Comprehensive performance analytics and KPI tracking for maritime operations"
-    >
+    <PageLayout>
       <AnalyticsNavigation />
       <PerformanceMetrics />
     </PageLayout>

@@ -4,10 +4,7 @@ import TrendAnalysis from '@/components/analytics/TrendAnalysis';
 
 export default function TrendsPage() {
   return (
-    <PageLayout 
-      title="Trend Analysis" 
-      description="Analyze compliance trends, performance patterns, and fleet evolution over time"
-    >
+    <PageLayout>
       <AnalyticsNavigation />
       <TrendAnalysis />
     </PageLayout>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   CheckCircle, 
   Clock, 
@@ -41,7 +41,7 @@ interface TaskAssignee {
 }
 
 interface EnhancedMission {
-  id: number;
+  id: string; // Changed from number to string
   title: string;
   description: string;
   vessel: string;
@@ -113,39 +113,42 @@ const getCheckboxIcon = (type: string) => {
 export default function EnhancedMobileMissionList() {
   const { missions: rawMissions } = useMissions();
   
-  // Transform mock missions to EnhancedMission format
-  const missions: EnhancedMission[] = rawMissions.map((mission: Mission) => ({
-    id: parseInt(mission.id.split('_')[1]),
-    title: mission.title,
-    description: mission.description,
-    vessel: mission.vessel,
-    assignedBy: mission.assignedBy,
-    assignedTo: mission.assignedTo,
-    status: mission.status,
-    priority: mission.priority,
-    dueTime: new Date(mission.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-    estimatedDuration: mission.estimatedDuration,
-    offline: mission.offline,
-    progress: mission.progress,
-    type: mission.type === 'compliance' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
-    checkboxes: mission.checkboxes.map(cb => ({
-      id: cb.id,
-      text: cb.text,
-      description: cb.description,
-      required: cb.required,
-      checked: cb.checked,
-      type: cb.type
-    })),
-    notes: mission.taskNotes,
-    completedRequired: mission.checkboxes.filter(cb => cb.required && cb.checked).length,
-    totalRequired: mission.checkboxes.filter(cb => cb.required).length,
-    totalOptional: mission.checkboxes.filter(cb => !cb.required).length
-  }));
+  const missions: EnhancedMission[] = useMemo(() => {
+    return rawMissions.map((mission: Mission) => ({
+      id: mission.id, // Use the original string ID
+      title: mission.title,
+      description: mission.description,
+      vessel: mission.vessel,
+      assignedBy: mission.assignedBy,
+      assignedTo: mission.assignedTo,
+      status: mission.status,
+      priority: mission.priority,
+      dueTime: mission.dueDate && !isNaN(new Date(mission.dueDate).getTime())
+        ? new Date(mission.dueDate).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+        : 'No due date',
+      estimatedDuration: mission.estimatedDuration,
+      offline: mission.offline,
+      progress: mission.progress,
+      type: mission.type === 'compliance' ? 'safety' : mission.type as 'safety' | 'equipment' | 'maintenance' | 'training',
+      checkboxes: mission.checkboxes.map(cb => ({
+        id: cb.id,
+        text: cb.text,
+        description: cb.description,
+        required: cb.required,
+        checked: cb.checked,
+        type: cb.type
+      })),
+      notes: mission.taskNotes,
+      completedRequired: mission.checkboxes.filter(cb => cb.required && cb.checked).length,
+      totalRequired: mission.checkboxes.filter(cb => cb.required).length,
+      totalOptional: mission.checkboxes.filter(cb => !cb.required).length
+    }));
+  }, [rawMissions]);
 
-  const [expandedMission, setExpandedMission] = useState<number | null>(null);
+  const [expandedMission, setExpandedMission] = useState<string | null>(null); // Changed from number to string
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const toggleMissionExpanded = (missionId: number) => {
+  const toggleMissionExpanded = (missionId: string) => { // Changed from number to string
     setExpandedMission(expandedMission === missionId ? null : missionId);
   };
 

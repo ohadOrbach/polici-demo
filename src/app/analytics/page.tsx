@@ -4,10 +4,7 @@ import AnalyticsDashboard from '@/components/analytics/AnalyticsDashboard';
 
 export default function AnalyticsPage() {
   return (
-    <PageLayout 
-      title="Fleet Analytics" 
-      description="Comprehensive maritime compliance and performance analytics"
-    >
+    <PageLayout>
       <AnalyticsNavigation />
       <AnalyticsDashboard />
     </PageLayout>

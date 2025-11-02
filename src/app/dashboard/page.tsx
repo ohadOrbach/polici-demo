@@ -5,10 +5,7 @@ import MissionGrid from '@/components/dashboard/MissionGrid';
 
 export default function DashboardPage() {
   return (
-    <PageLayout
-      title="⚓ Navigation Bridge"
-      description="Command center for maritime fleet operations, mission coordination, and vessel compliance monitoring"
-    >
+    <PageLayout>
       <div className="space-lg">
         {/* Key Statistics */}
         <section>

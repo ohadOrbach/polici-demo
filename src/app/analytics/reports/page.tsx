@@ -4,10 +4,7 @@ import ReportGenerator from '@/components/analytics/ReportGenerator';
 
 export default function ReportsPage() {
   return (
-    <PageLayout 
-      title="Report Generator" 
-      description="Generate comprehensive maritime compliance and operational reports"
-    >
+    <PageLayout>
       <AnalyticsNavigation />
       <ReportGenerator />
     </PageLayout>

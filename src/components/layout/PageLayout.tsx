@@ -1,45 +1,24 @@
 import Navigation from './Navigation';
-import { Waves, Anchor } from 'lucide-react';
+import Header from './Header'; // New component to be created
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  title?: string;
-  description?: string;
 }
 
-export default function PageLayout({ children, title, description }: PageLayoutProps) {
+export default function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className="min-h-screen bg-slate-900 relative">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-32 right-32 animate-float">
-          <Waves className="h-24 w-24 text-cyan-400" />
-        </div>
-        <div className="absolute bottom-32 left-32 animate-float" style={{ animationDelay: '3s' }}>
-          <Anchor className="h-20 w-20 text-cyan-400" />
-        </div>
-      </div>
+    <div className="min-h-screen bg-slate-900 text-slate-300 flex">
+      {/* Sidebar Navigation */}
+      <aside className="w-64 flex-shrink-0 bg-slate-800/80 border-r border-slate-700">
+        <Navigation />
+      </aside>
       
-      <Navigation />
-      
-      <div className="relative z-10 container-lg py-8">
-        {(title || description) && (
-          <header className="mb-12">
-            <div className="bg-slate-800/80 backdrop-blur-sm p-8 space-sm rounded-2xl border border-slate-700">
-              {title && (
-                <h1 className="text-h1 text-white flex items-center">
-                  <div className="w-1.5 h-12 bg-gradient-to-b from-cyan-500 to-cyan-600 rounded-full mr-4"></div>
-                  {title}
-                </h1>
-              )}
-              {description && (
-                <p className="text-body-lg text-slate-300 max-w-4xl">{description}</p>
-              )}
-            </div>
-          </header>
-        )}
-        
-        <main>{children}</main>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-y-auto">
+        <Header />
+        <div className="relative z-10 p-8 flex-1">
+          <main>{children}</main>
+        </div>
       </div>
       
       {/* Enhanced Mockup Indicator */}
