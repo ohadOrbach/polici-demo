@@ -20,7 +20,7 @@ export default function Navigation() {
           <div className="w-10 h-10 bg-gradient-to-r from-cyan-600 to-cyan-700 rounded-xl flex items-center justify-center shadow-lg">
             <Ship className="h-6 w-6 text-white" />
           </div>
-          <span className="text-h3 bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent">Captain's Eye</span>
+          <span className="text-h3 bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent">Captain&apos;s Eye</span>
         </Link>
       </div>
 
