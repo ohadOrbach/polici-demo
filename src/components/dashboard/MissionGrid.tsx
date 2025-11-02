@@ -1,87 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { Calendar, Clock, User, Ship, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
-
-// Mock mission data
-const missions = [
-  {
-    id: 'MSN-001',
-    title: 'Safety Drill - Fire Emergency',
-    description: 'Complete fire safety drill including evacuation procedures and equipment check',
-    ship: 'MV Atlantic Star',
-    captain: 'Capt. Smith',
-    status: 'in-progress',
-    priority: 'high',
-    dueDate: '2025-09-20',
-    progress: 75,
-    assignedDate: '2025-09-15',
-    category: 'Safety Drill'
-  },
-  {
-    id: 'MSN-002',
-    title: 'Engine Room Inspection',
-    description: 'Monthly engine room safety and maintenance compliance check',
-    ship: 'MV Pacific Queen',
-    captain: 'Capt. Jones',
-    status: 'completed',
-    priority: 'medium',
-    dueDate: '2025-09-18',
-    progress: 100,
-    assignedDate: '2025-09-10',
-    category: 'Inspection'
-  },
-  {
-    id: 'MSN-003',
-    title: 'Navigation Equipment Test',
-    description: 'Test all navigation equipment including GPS, radar, and communication systems',
-    ship: 'MV Northern Wind',
-    captain: 'Capt. Wilson',
-    status: 'overdue',
-    priority: 'high',
-    dueDate: '2025-09-16',
-    progress: 30,
-    assignedDate: '2025-09-12',
-    category: 'Equipment Test'
-  },
-  {
-    id: 'MSN-004',
-    title: 'Crew Training - MOB Drill',
-    description: 'Man overboard drill training for all crew members',
-    ship: 'MV Southern Cross',
-    captain: 'Capt. Davis',
-    status: 'published',
-    priority: 'medium',
-    dueDate: '2025-09-25',
-    progress: 0,
-    assignedDate: '2025-09-17',
-    category: 'Training'
-  },
-  {
-    id: 'MSN-005',
-    title: 'Cargo Hold Inspection',
-    description: 'Pre-loading inspection of cargo holds and securing equipment',
-    ship: 'MV Eastern Dawn',
-    captain: 'Capt. Brown',
-    status: 'in-progress',
-    priority: 'medium',
-    dueDate: '2025-09-22',
-    progress: 45,
-    assignedDate: '2025-09-16',
-    category: 'Inspection'
-  },
-  {
-    id: 'MSN-006',
-    title: 'Environmental Compliance Check',
-    description: 'Verify compliance with environmental regulations and waste management',
-    ship: 'MV Western Explorer',
-    captain: 'Capt. Taylor',
-    status: 'draft',
-    priority: 'low',
-    dueDate: '2025-09-28',
-    progress: 0,
-    assignedDate: '2025-09-17',
-    category: 'Compliance'
-  }
-];
+import { useMissions } from '@/contexts/MissionsContext';
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -113,6 +34,8 @@ const getStatusIcon = (status: string) => {
 };
 
 export default function MissionGrid() {
+  const { missions } = useMissions();
+
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/50">
       <div className="p-8 border-b border-gray-200/50">
@@ -181,11 +104,11 @@ export default function MissionGrid() {
               <div className="space-y-2 text-sm text-gray-600">
                 <div className="flex items-center">
                   <Ship className="h-4 w-4 mr-2 text-gray-400" />
-                  <span>{mission.ship}</span>
+                  <span>{mission.vessel}</span>
                 </div>
                 <div className="flex items-center">
                   <User className="h-4 w-4 mr-2 text-gray-400" />
-                  <span>{mission.captain}</span>
+                  <span>{mission.assignedTo.name}</span>
                 </div>
                 <div className="flex items-center">
                   <Calendar className="h-4 w-4 mr-2 text-gray-400" />
@@ -197,7 +120,7 @@ export default function MissionGrid() {
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-500">
-                    {mission.category}
+                    {mission.type}
                   </span>
                   <div className="flex space-x-2">
                     <Link href={`/missions/${mission.id}/view`} className="text-blue-600 hover:text-blue-700 text-sm font-medium">

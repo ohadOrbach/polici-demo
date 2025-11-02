@@ -201,10 +201,11 @@ export default function EnhancedMissionCreationForm() {
       {/* Vessel and Due Date */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label htmlFor="vessel-select" className="block text-sm font-medium text-slate-300 mb-2">
             Vessel
           </label>
           <select 
+            id="vessel-select"
             value={vessel}
             onChange={(e) => setVessel(e.target.value)}
             className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
@@ -218,10 +219,11 @@ export default function EnhancedMissionCreationForm() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label htmlFor="due-date-input" className="block text-sm font-medium text-slate-300 mb-2">
             Due date
           </label>
           <input
+            id="due-date-input"
             type="datetime-local"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
