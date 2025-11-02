@@ -22,8 +22,11 @@ import {
   Star,
   Shield,
   Users,
-  Calendar
+  Calendar,
+  MessageSquare
 } from 'lucide-react';
+import CheckboxNoteModal from './CheckboxNoteModal';
+import { useMissions } from '@/contexts/MissionsContext';
 
 interface TaskCheckbox {
   id: string;
@@ -32,6 +35,7 @@ interface TaskCheckbox {
   required: boolean;
   checked: boolean;
   type: 'checkbox' | 'photo' | 'video' | 'file' | 'signature';
+  note?: string;
   attachments?: {
     photos?: string[];
     videos?: string[];
@@ -137,12 +141,14 @@ export default function EnhancedTaskView({
   onBack, 
   onComplete 
 }: EnhancedTaskViewProps) {
+  const { updateCheckboxNote } = useMissions();
   const [currentTask, setCurrentTask] = useState<EnhancedTask>(task);
   const [expandedCheckbox, setExpandedCheckbox] = useState<string | null>(null);
   const [showSignature, setShowSignature] = useState(false);
   const [signature, setSignature] = useState('');
   const [taskNotes, setTaskNotes] = useState(currentTask.taskNotes);
   const [showTaskNotes, setShowTaskNotes] = useState(false);
+  const [editingNote, setEditingNote] = useState<TaskCheckbox | null>(null);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -220,6 +226,20 @@ export default function EnhancedTaskView({
   const handleSaveNotes = () => {
     setCurrentTask(prev => ({ ...prev, taskNotes }));
     setShowTaskNotes(false);
+  };
+
+  const handleSaveCheckboxNote = (note: string) => {
+    if (editingNote) {
+      updateCheckboxNote(currentTask.id, editingNote.id, note);
+      // We also need to update the local state to reflect the change immediately
+      setCurrentTask(prev => ({
+        ...prev,
+        checkboxes: prev.checkboxes.map(cb =>
+          cb.id === editingNote.id ? { ...cb, note } : cb
+        ),
+      }));
+      setEditingNote(null);
+    }
   };
 
   const renderCheckboxContent = (checkbox: TaskCheckbox) => {
@@ -617,8 +637,19 @@ export default function EnhancedTaskView({
                           )}
                         </div>
                       )}
+                      {checkbox.note && (
+                        <div className="mt-2 p-2 bg-slate-600/50 rounded-lg text-xs text-slate-300 italic">
+                          {checkbox.note}
+                        </div>
+                      )}
                     </div>
                   </div>
+                  <button 
+                    onClick={() => setEditingNote(checkbox)}
+                    className="p-2 text-slate-400 hover:text-white"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                  </button>
                 </div>
 
                 {renderCheckboxContent(checkbox)}
@@ -697,6 +728,14 @@ export default function EnhancedTaskView({
             </button>
           </div>
         </div>
+      )}
+
+      {editingNote && (
+        <CheckboxNoteModal
+          note={editingNote.note || ''}
+          onSave={handleSaveCheckboxNote}
+          onClose={() => setEditingNote(null)}
+        />
       )}
     </div>
   );

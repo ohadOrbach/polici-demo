@@ -16,7 +16,7 @@ import {
   CheckSquare
 } from 'lucide-react';
 import { useMissions } from '@/contexts/MissionsContext';
-import { Mission } from '@/data/mockData';
+import { Mission, mockUsers } from '@/data/mockData';
 
 interface MissionItem {
   id: string;
@@ -33,7 +33,7 @@ export default function EnhancedMissionCreationForm() {
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [vessel, setVessel] = useState('');
+  const [assignedToId, setAssignedToId] = useState('');
   const [dueDate, setDueDate] = useState('');
 
   const [missionItems, setMissionItems] = useState<MissionItem[]>([
@@ -56,24 +56,30 @@ export default function EnhancedMissionCreationForm() {
   });
 
   const handlePublish = () => {
-    if (!title || !vessel || !dueDate) {
+    if (!title || !assignedToId || !dueDate) {
       alert('Please fill out all mission fields.');
+      return;
+    }
+    
+    const assignedUser = mockUsers.find(user => user.id === assignedToId);
+    if (!assignedUser) {
+      alert('Selected user not found.');
       return;
     }
 
     const newMission: Omit<Mission, 'id' | 'createdAt' | 'updatedAt'> = {
       title,
       description,
-      vessel,
+      vessel: (assignedUser.vessels && assignedUser.vessels[0]) || 'N/A', // Assign user's first vessel or a default
       dueDate,
       status: 'pending',
-      priority: 'medium', // Default priority
+      priority: 'medium',
       progress: 0,
-      offline: false, // Default offline status
-      type: 'maintenance', // Default type
-      estimatedDuration: '1h 30m', // Default duration
+      offline: false,
+      type: 'maintenance',
+      estimatedDuration: '1h 30m',
       assignedBy: { id: 'user_001', name: 'Fleet Manager', role: 'Fleet Manager' },
-      assignedTo: { id: 'user_002', name: 'Ship Captain', role: 'Ship Captain' },
+      assignedTo: assignedUser,
       notes: [],
       taskNotes: '',
       checkboxes: missionItems.map(item => ({
@@ -86,10 +92,7 @@ export default function EnhancedMissionCreationForm() {
       }))
     };
     
-    // The context will handle adding id, createdAt, etc.
     addMission(newMission as Mission);
-
-    // Redirect to dashboard after publishing
     router.push('/dashboard');
   };
 
@@ -198,24 +201,24 @@ export default function EnhancedMissionCreationForm() {
         />
       </div>
 
-      {/* Vessel and Due Date */}
+      {/* Assign User and Due Date */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="vessel-select" className="block text-sm font-medium text-slate-300 mb-2">
-            Vessel
+          <label htmlFor="user-select" className="block text-sm font-medium text-slate-300 mb-2">
+            Assign to User
           </label>
           <select 
-            id="vessel-select"
-            value={vessel}
-            onChange={(e) => setVessel(e.target.value)}
+            id="user-select"
+            value={assignedToId}
+            onChange={(e) => setAssignedToId(e.target.value)}
             className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
           >
-            <option>Select a vessel</option>
-            <option>MV Northern Star</option>
-            <option>MV Ocean Explorer</option>
-            <option>MV Atlantic Voyager</option>
-            <option>MV Pacific Dream</option>
-            <option>MV Caribbean Queen</option>
+            <option value="">Select a user</option>
+            {mockUsers.map(user => (
+              <option key={user.id} value={user.id}>
+                {user.name} ({user.role})
+              </option>
+            ))}
           </select>
         </div>
         <div>

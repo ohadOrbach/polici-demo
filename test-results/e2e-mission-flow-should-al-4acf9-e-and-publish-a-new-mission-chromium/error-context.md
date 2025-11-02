@@ -1,0 +1,221 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - navigation [ref=e13]:
+      - generic [ref=e15]:
+        - img [ref=e17]
+        - generic [ref=e21]:
+          - heading "Maritime" [level=1] [ref=e22]
+          - paragraph [ref=e23]: Missions
+      - generic [ref=e24]:
+        - link "Dashboard" [ref=e25] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e26]
+          - generic [ref=e28]: Dashboard
+        - link "Missions" [ref=e29] [cursor=pointer]:
+          - /url: /missions
+          - img [ref=e30]
+          - generic [ref=e33]: Missions
+        - button "Create from File" [ref=e35] [cursor=pointer]:
+          - img [ref=e36]
+          - generic [ref=e39]: Create from File
+    - generic [ref=e40]:
+      - banner [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - heading "Create Mission" [level=1] [ref=e44]
+            - paragraph [ref=e45]: Shore Managers can create and edit missions for vessels and their crew.
+          - generic [ref=e46]:
+            - button [ref=e47] [cursor=pointer]:
+              - img [ref=e48]
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - paragraph [ref=e53]: Jane Doe
+                - paragraph [ref=e54]: Shore Manager
+              - generic [ref=e56]: JD
+      - main [ref=e57]:
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: Mission title
+            - textbox "Enter mission title" [ref=e62]: Test Mission 1762077304342
+          - generic [ref=e63]:
+            - generic [ref=e64]: Description
+            - textbox "Enter mission description" [active] [ref=e65]: This is a test description for the new mission.
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - generic [ref=e68]: Assign to User
+              - combobox "Assign to User" [ref=e69]:
+                - option "Select a user" [selected]
+                - option "Sarah Johnson (Safety Manager)"
+                - option "Mike Chen (Fleet Manager)"
+                - option "Captain James Smith (Ship Captain)"
+                - option "Chief Engineer Davis (Chief Engineer)"
+                - option "Tom Wilson (Safety Manager)"
+                - option "Captain Maria Rodriguez (Ship Captain)"
+                - option "Dr. Emma Thompson (Certification Company)"
+            - generic [ref=e70]:
+              - generic [ref=e71]: Due date
+              - textbox "Due date" [ref=e72]
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - heading "Mission Checklist" [level=3] [ref=e75]
+              - button "Add Item" [ref=e76] [cursor=pointer]:
+                - img [ref=e77]
+                - generic [ref=e78]: Add Item
+            - generic [ref=e79]:
+              - generic [ref=e81]:
+                - button [ref=e82] [cursor=pointer]:
+                  - img [ref=e83]
+                - generic [ref=e90]:
+                  - generic [ref=e91]:
+                    - generic [ref=e92]:
+                      - img [ref=e94]
+                      - generic [ref=e97]:
+                        - heading "Pre-departure safety checks" [level=4] [ref=e98]
+                        - paragraph [ref=e99]: Complete all pre-departure safety procedures
+                    - generic [ref=e100]:
+                      - button [ref=e101] [cursor=pointer]:
+                        - img [ref=e102]
+                      - button [ref=e105] [cursor=pointer]:
+                        - img [ref=e106]
+                  - generic [ref=e109]:
+                    - generic [ref=e110]:
+                      - generic [ref=e111] [cursor=pointer]:
+                        - checkbox "Required" [checked] [ref=e112]
+                        - generic [ref=e113]: Required
+                      - generic [ref=e114]:
+                        - generic [ref=e115]: "Type:"
+                        - combobox [ref=e116]:
+                          - option "Checkbox" [selected]
+                          - option "Photo"
+                          - option "Video"
+                          - option "File"
+                          - option "Signature"
+                    - generic [ref=e117]: Checkbox
+              - generic [ref=e119]:
+                - button [ref=e120] [cursor=pointer]:
+                  - img [ref=e121]
+                - generic [ref=e128]:
+                  - generic [ref=e129]:
+                    - generic [ref=e130]:
+                      - img [ref=e132]
+                      - generic [ref=e135]:
+                        - heading "Safety drill documentation" [level=4] [ref=e136]
+                        - paragraph [ref=e137]: Take photos of crew at muster stations
+                    - generic [ref=e138]:
+                      - button [ref=e139] [cursor=pointer]:
+                        - img [ref=e140]
+                      - button [ref=e143] [cursor=pointer]:
+                        - img [ref=e144]
+                  - generic [ref=e147]:
+                    - generic [ref=e148]:
+                      - generic [ref=e149] [cursor=pointer]:
+                        - checkbox "Required" [checked] [ref=e150]
+                        - generic [ref=e151]: Required
+                      - generic [ref=e152]:
+                        - generic [ref=e153]: "Type:"
+                        - combobox [ref=e154]:
+                          - option "Checkbox"
+                          - option "Photo" [selected]
+                          - option "Video"
+                          - option "File"
+                          - option "Signature"
+                    - generic [ref=e155]: Photo
+              - generic [ref=e157]:
+                - button [ref=e158] [cursor=pointer]:
+                  - img [ref=e159]
+                - generic [ref=e166]:
+                  - generic [ref=e167]:
+                    - generic [ref=e168]:
+                      - img [ref=e170]
+                      - generic [ref=e173]:
+                        - heading "Engine inspection video" [level=4] [ref=e174]
+                        - paragraph [ref=e175]: Record walkthrough of engine room inspection
+                    - generic [ref=e176]:
+                      - button [ref=e177] [cursor=pointer]:
+                        - img [ref=e178]
+                      - button [ref=e181] [cursor=pointer]:
+                        - img [ref=e182]
+                  - generic [ref=e185]:
+                    - generic [ref=e186]:
+                      - generic [ref=e187] [cursor=pointer]:
+                        - checkbox "Required" [ref=e188]
+                        - generic [ref=e189]: Required
+                      - generic [ref=e190]:
+                        - generic [ref=e191]: "Type:"
+                        - combobox [ref=e192]:
+                          - option "Checkbox"
+                          - option "Photo"
+                          - option "Video" [selected]
+                          - option "File"
+                          - option "Signature"
+                    - generic [ref=e193]: Video
+              - generic [ref=e195]:
+                - button [ref=e196] [cursor=pointer]:
+                  - img [ref=e197]
+                - generic [ref=e204]:
+                  - generic [ref=e205]:
+                    - generic [ref=e206]:
+                      - img [ref=e208]
+                      - generic [ref=e210]:
+                        - heading "Maintenance report upload" [level=4] [ref=e211]
+                        - paragraph [ref=e212]: Upload completed maintenance documentation
+                    - generic [ref=e213]:
+                      - button [ref=e214] [cursor=pointer]:
+                        - img [ref=e215]
+                      - button [ref=e218] [cursor=pointer]:
+                        - img [ref=e219]
+                  - generic [ref=e222]:
+                    - generic [ref=e223]:
+                      - generic [ref=e224] [cursor=pointer]:
+                        - checkbox "Required" [checked] [ref=e225]
+                        - generic [ref=e226]: Required
+                      - generic [ref=e227]:
+                        - generic [ref=e228]: "Type:"
+                        - combobox [ref=e229]:
+                          - option "Checkbox"
+                          - option "Photo"
+                          - option "Video"
+                          - option "File" [selected]
+                          - option "Signature"
+                    - generic [ref=e230]: File
+              - generic [ref=e232]:
+                - button [ref=e233] [cursor=pointer]:
+                  - img [ref=e234]
+                - generic [ref=e241]:
+                  - generic [ref=e242]:
+                    - generic [ref=e243]:
+                      - img [ref=e245]
+                      - generic [ref=e247]:
+                        - heading "Captain sign-off" [level=4] [ref=e248]
+                        - paragraph [ref=e249]: Digital signature confirming completion
+                    - generic [ref=e250]:
+                      - button [ref=e251] [cursor=pointer]:
+                        - img [ref=e252]
+                      - button [ref=e255] [cursor=pointer]:
+                        - img [ref=e256]
+                  - generic [ref=e259]:
+                    - generic [ref=e260]:
+                      - generic [ref=e261] [cursor=pointer]:
+                        - checkbox "Required" [checked] [ref=e262]
+                        - generic [ref=e263]: Required
+                      - generic [ref=e264]:
+                        - generic [ref=e265]: "Type:"
+                        - combobox [ref=e266]:
+                          - option "Checkbox"
+                          - option "Photo"
+                          - option "Video"
+                          - option "File"
+                          - option "Signature" [selected]
+                    - generic [ref=e267]: Signature
+          - generic [ref=e268]:
+            - button "Archive" [ref=e269] [cursor=pointer]
+            - generic [ref=e270]:
+              - button "Save Draft" [ref=e271] [cursor=pointer]
+              - button "Publish Mission" [ref=e272] [cursor=pointer]
+```

@@ -19,6 +19,7 @@ export interface TaskCheckbox {
   required: boolean;
   checked: boolean;
   type: 'checkbox' | 'photo' | 'video' | 'file' | 'signature';
+  note?: string;
   attachments?: {
     photos?: string[];
     videos?: string[];

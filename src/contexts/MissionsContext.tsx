@@ -6,6 +6,7 @@ import { mockMissions, Mission } from '@/data/mockData';
 interface MissionsContextType {
   missions: Mission[];
   addMission: (mission: Mission) => void;
+  updateCheckboxNote: (missionId: string, checkboxId: string, note: string) => void;
 }
 
 const MissionsContext = createContext<MissionsContextType | undefined>(undefined);
@@ -24,8 +25,25 @@ export const MissionsProvider = ({ children }: { children: ReactNode }) => {
     setMissions(prevMissions => [newMission, ...prevMissions]);
   };
 
+  const updateCheckboxNote = (missionId: string, checkboxId: string, note: string) => {
+    setMissions(prevMissions =>
+      prevMissions.map(mission =>
+        mission.id === missionId
+          ? {
+              ...mission,
+              checkboxes: mission.checkboxes.map(checkbox =>
+                checkbox.id === checkboxId
+                  ? { ...checkbox, note }
+                  : checkbox
+              ),
+            }
+          : mission
+      )
+    );
+  };
+
   return (
-    <MissionsContext.Provider value={{ missions, addMission }}>
+    <MissionsContext.Provider value={{ missions, addMission, updateCheckboxNote }}>
       {children}
     </MissionsContext.Provider>
   );
